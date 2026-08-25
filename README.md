@@ -1,57 +1,20 @@
 # DB Learning - Task Management Database
 
-## 概要
+## 1. 概要
 
 MySQLを使用して作成したタスク管理データベースです。
 
-DBの基本操作および複数テーブルを使用したSQLの学習を目的として作成しました。
+データベースの基本的な設計・構築・操作を学習することを目的として作成しました。
 
-## 使用技術
+Javaで作成したタスク管理システムとは直接接続せず、
+DB単体の学習成果物として作成しています。
 
-- MySQL 8.4
-- Docker
-- GitHub Codespaces
+---
 
-## データベース
+## 2. 目的
 
-データベース名：
-
-`db_learning`
-
-## テーブル構成
-
-### users
-
-ユーザー情報を管理するテーブルです。
-
-| カラム | 型 | 制約 |
-|---|---|---|
-| user_id | INT | PRIMARY KEY |
-| user_name | VARCHAR(30) | NOT NULL |
-
-### categories
-
-タスクのカテゴリを管理するテーブルです。
-
-| カラム | 型 | 制約 |
-|---|---|---|
-| category_id | INT | PRIMARY KEY |
-| category_name | VARCHAR(30) | NOT NULL |
-
-### tasks
-
-タスク情報を管理するテーブルです。
-
-| カラム | 型 | 制約 |
-|---|---|---|
-| task_id | INT | PRIMARY KEY |
-| task_name | VARCHAR(30) | NOT NULL |
-| due_date | DATE | NOT NULL |
-| status | VARCHAR(10) | NOT NULL |
-| user_id | INT | FOREIGN KEY |
-| category_id | INT | FOREIGN KEY |
-
-## 学習したSQL
+以下のデータベース操作・SQLを学習し、
+複数テーブルから必要な情報を取得・集計できることを目標としています。
 
 - CREATE TABLE
 - INSERT
@@ -63,23 +26,77 @@ DBの基本操作および複数テーブルを使用したSQLの学習を目的
 - JOIN
 - GROUP BY
 
-## SQLファイル
+また、主キー（PRIMARY KEY）や外部キー（FOREIGN KEY）を使用した
+複数テーブルのリレーション設計についても学習しました。
 
-| ファイル | 内容 |
-|---|---|
-| 01_create_tables.sql | データベース・テーブル作成 |
-| 02_insert_data.sql | サンプルデータ登録 |
-| 03_update_delete.sql | データ更新・削除 |
-| 04_select.sql | SELECT・WHERE・ORDER BY |
-| 05_join.sql | 複数テーブルのJOIN |
-| 06_group_by.sql | GROUP BYによる集計 |
+---
 
-## ER図
+## 3. 使用技術
 
-`diagram/er_diagram.png`
+- MySQL 8.4
+- Docker
+- GitHub Codespaces
 
-にER図を配置しています。
+MySQLはDockerコンテナ上で起動しています。
 
-## 実行環境
+データベース名：
 
-MySQL 8.4をDockerで起動し、GitHub Codespaces上でSQLを実行しています。
+`db_learning`
+
+---
+
+## 4. データベース構成
+
+本データベースでは、以下の3テーブルを使用しています。
+
+### users
+
+ユーザー情報を管理するテーブルです。
+
+| カラム | データ型 | 制約 | 説明 |
+|---|---|---|---|
+| user_id | INT | PRIMARY KEY, NOT NULL | ユーザーID |
+| user_name | VARCHAR(30) | NOT NULL | ユーザー名 |
+
+---
+
+### categories
+
+タスクのカテゴリを管理するテーブルです。
+
+| カラム | データ型 | 制約 | 説明 |
+|---|---|---|---|
+| category_id | INT | PRIMARY KEY, NOT NULL | カテゴリID |
+| category_name | VARCHAR(30) | NOT NULL | カテゴリ名 |
+
+---
+
+### tasks
+
+タスク情報を管理するテーブルです。
+
+| カラム | データ型 | 制約 | 説明 |
+|---|---|---|---|
+| task_id | INT | PRIMARY KEY, NOT NULL | タスクID |
+| task_name | VARCHAR(30) | NOT NULL | タスク名 |
+| due_date | DATE | NOT NULL | 期限 |
+| status | VARCHAR(10) | NOT NULL | タスクの状態 |
+| user_id | INT | FOREIGN KEY, NOT NULL | 担当ユーザーID |
+| category_id | INT | FOREIGN KEY, NOT NULL | カテゴリID |
+
+---
+
+## 5. テーブル間の関係
+
+テーブル間には以下のリレーションを設定しています。
+
+```text
+users
+  │
+  │ 1 : N
+  ↓
+tasks
+  │
+  │ N : 1
+  ↓
+categories
