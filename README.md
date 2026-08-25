@@ -98,6 +98,8 @@ MySQLはDockerコンテナ上で起動しています。
 - JOIN
 - GROUP BY
 
+---
+
 ## 6. SQLファイル
 
 | ファイル | 内容 |
@@ -109,11 +111,15 @@ MySQLはDockerコンテナ上で起動しています。
 | 05_join.sql | 複数テーブルのJOIN |
 | 06_group_by.sql | GROUP BYによる集計 |
 
+---
+
 ## 7. ER図
 
 `diagram/er_diagram.png`
 
 にER図を配置しています。
+
+---
 
 ## 8. 実行環境
 
