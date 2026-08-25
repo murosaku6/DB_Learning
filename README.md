@@ -1,143 +1,341 @@
-# DB Learning - Task Management Database
+# DB Learning
 
-## 1. 概要
+MySQLを使用したデータベース・SQL学習用の成果物です。
 
-MySQLを使用して作成したタスク管理データベースです。
+本プロジェクトでは、複数の題材を使ってデータベースの設計からSQLの作成・実行までを学習します。
 
-データベースの基本的な設計・構築・操作を学習することを目的として作成しました。
+## 1. 目的
 
-Javaで作成したタスク管理システムとは直接接続せず、
-DB単体の学習成果物として作成しています。
+このプロジェクトでは、以下のデータベースを作成しながら、データベースに関する基礎的な知識とSQLの操作方法を身につけることを目的としています。
 
----
+* テーブル設計
+* 主キー・外部キー
+* テーブル間のリレーション
+* CREATE TABLE
+* INSERT
+* SELECT
+* WHERE
+* ORDER BY
+* UPDATE
+* DELETE
+* JOIN
+* GROUP BY
+* ER図の作成
 
-## 2. 目的
-
-以下のデータベース操作・SQLを学習し、
-複数テーブルから必要な情報を取得・集計できることを目標としています。
-
-- CREATE TABLE
-- INSERT
-- SELECT
-- WHERE
-- ORDER BY
-- UPDATE
-- DELETE
-- JOIN
-- GROUP BY
-
-また、主キー（PRIMARY KEY）や外部キー（FOREIGN KEY）を使用した
-複数テーブルのリレーション設計についても学習しました。
+作成したデータベースはJavaのシステムとは直接接続せず、データベース単体の設計・SQL学習用の成果物として作成します。
 
 ---
 
-## 3. 使用技術
+## 2. 使用環境
 
-- MySQL 8.4
-- Docker
-- GitHub Codespaces
+* MySQL 8.4
+* Docker
+* Docker Compose
+* GitHub Codespaces
+* SQL
 
-MySQLはDockerコンテナ上で起動しています。
-
-データベース名：
-
-`db_learning`
+MySQLはDocker Composeを使用して起動します。
 
 ---
 
-## 4. データベース構成
+## 3. データベース一覧
 
-本データベースでは、以下の3テーブルを使用しています。
+現在、以下の3つのデータベースを作成する予定です。
 
-### users
-
-ユーザー情報を管理するテーブルです。
-
-| カラム | データ型 | 制約 | 説明 |
-|---|---|---|---|
-| user_id | INT | PRIMARY KEY, NOT NULL | ユーザーID |
-| user_name | VARCHAR(30) | NOT NULL | ユーザー名 |
+| データベース                | 内容              | 状態   |
+| --------------------- | --------------- | ---- |
+| Task Management DB    | タスクの管理          | 完成   |
+| Library Management DB | 図書館・本・利用者・貸出の管理 | 作成予定 |
+| Grade Management DB   | 学生・科目・成績の管理     | 作成予定 |
 
 ---
 
-### categories
+## 4. ディレクトリ構成
 
-タスクのカテゴリを管理するテーブルです。
-
-| カラム | データ型 | 制約 | 説明 |
-|---|---|---|---|
-| category_id | INT | PRIMARY KEY, NOT NULL | カテゴリID |
-| category_name | VARCHAR(30) | NOT NULL | カテゴリ名 |
-
----
-
-### tasks
-
-タスク情報を管理するテーブルです。
-
-| カラム | データ型 | 制約 | 説明 |
-|---|---|---|---|
-| task_id | INT | PRIMARY KEY, NOT NULL | タスクID |
-| task_name | VARCHAR(30) | NOT NULL | タスク名 |
-| due_date | DATE | NOT NULL | 期限 |
-| status | VARCHAR(10) | NOT NULL | タスクの状態 |
-| user_id | INT | FOREIGN KEY, NOT NULL | 担当ユーザーID |
-| category_id | INT | FOREIGN KEY, NOT NULL | カテゴリID |
-
----
-
-## 5. 学習したSQL
-
-- CREATE TABLE
-- INSERT
-- SELECT
-- WHERE
-- ORDER BY
-- UPDATE
-- DELETE
-- JOIN
-- GROUP BY
-
----
-
-## 6. SQLファイル
-
-| ファイル | 内容 |
-|---|---|
-| 01_create_tables.sql | データベース・テーブル作成 |
-| 02_insert_data.sql | サンプルデータ登録 |
-| 03_update_delete.sql | データ更新・削除 |
-| 04_select.sql | SELECT・WHERE・ORDER BY |
-| 05_join.sql | 複数テーブルのJOIN |
-| 06_group_by.sql | GROUP BYによる集計 |
-
----
-
-## 7. ER図
-
-`diagram/er_diagram.png`
-
-にER図を配置しています。
-
----
-
-## 8. 実行環境
-
-MySQL 8.4をDockerで起動し、GitHub Codespaces上でSQLを実行しています。
-
----
-
-## 9. テーブル間の関係
-
-テーブル間には以下のリレーションを設定しています。
+現在のプロジェクトは以下の構成です。
 
 ```text
-users
-  │
-  │ 1 : N
-  ↓
-tasks
-  │
-  │ N : 1
-  ↓
-categories
+DB_Learning/
+│
+├── compose.yaml
+├── README.md
+│
+├── task_management/
+│   ├── sql/
+│   │   ├── 01_create_tables.sql
+│   │   ├── 02_insert_data.sql
+│   │   ├── 03_update_delete.sql
+│   │   ├── 04_select.sql
+│   │   ├── 05_join.sql
+│   │   └── 06_group_by.sql
+│   │
+│   └── diagram/
+│       └── er_diagram.png
+│
+├── library_management/
+│   ├── sql/
+│   └── diagram/
+│
+└── grade_management/
+    ├── sql/
+    └── diagram/
+```
+
+---
+
+## 5. SQLファイルについて
+
+各データベースでは、基本的に以下の順番でSQLを作成します。
+
+### 01_create_tables.sql
+
+データベースで使用するテーブルを作成します。
+
+主に以下のSQLを使用します。
+
+```sql
+CREATE TABLE
+```
+
+---
+
+### 02_insert_data.sql
+
+作成したテーブルに初期データを登録します。
+
+```sql
+INSERT INTO
+```
+
+---
+
+### 03_update_delete.sql
+
+登録したデータを変更・削除します。
+
+```sql
+UPDATE
+DELETE
+```
+
+---
+
+### 04_select.sql
+
+データを検索・取得します。
+
+```sql
+SELECT
+WHERE
+ORDER BY
+```
+
+---
+
+### 05_join.sql
+
+複数のテーブルを結合してデータを取得します。
+
+```sql
+JOIN
+```
+
+---
+
+### 06_group_by.sql
+
+データをグループ化・集計します。
+
+```sql
+GROUP BY
+COUNT
+SUM
+AVG
+```
+
+---
+
+## 6. タスク管理DB
+
+タスク管理DBでは、タスクを管理するためのテーブルを作成しました。
+
+SQLの基本的な操作から、複数テーブルを使用したJOIN、データの集計を行うGROUP BYまで一通り学習しています。
+
+### 学習内容
+
+* テーブル作成
+* データ登録
+* データ更新
+* データ削除
+* データ検索
+* 条件検索
+* 並び替え
+* テーブル結合
+* データ集計
+* ER図作成
+
+タスク管理DBは、今回のデータベース学習における最初の成果物として完成しています。
+
+---
+
+## 7. 図書館管理DB
+
+タスク管理DBで学習した内容を応用し、図書館を題材としたデータベースを作成します。
+
+現在は作成準備段階です。
+
+予定している主なテーブルは以下です。
+
+* books
+* authors
+* members
+* loans
+
+本・著者・利用者・貸出情報などを管理し、テーブル同士を関連付けてデータを取得できる構成を目指します。
+
+タスク管理DBと同様に、
+
+```text
+CREATE TABLE
+↓
+INSERT
+↓
+UPDATE / DELETE
+↓
+SELECT
+↓
+JOIN
+↓
+GROUP BY
+```
+
+の順番で学習します。
+
+---
+
+## 8. 成績管理DB
+
+最後に、学生の成績を管理するデータベースを作成する予定です。
+
+学生・科目・成績などの情報を管理し、複数のテーブルを関連付けたデータベースを作成します。
+
+予定している学習内容は以下です。
+
+* 学生情報の管理
+* 科目情報の管理
+* 成績情報の管理
+* テーブル間のリレーション
+* JOINによる成績検索
+* GROUP BYによる集計
+* 平均点などの計算
+
+---
+
+## 9. ER図
+
+各データベースについて、テーブル同士の関係をER図として作成します。
+
+ER図では、
+
+* 主キー
+* 外部キー
+* 1対1
+* 1対多
+* テーブル間の関係
+
+などを確認できるようにします。
+
+各データベースのER図は、それぞれの `diagram` フォルダに保存します。
+
+---
+
+## 10. MySQLの起動
+
+Docker Composeを使用してMySQLを起動します。
+
+```bash
+docker compose up -d
+```
+
+コンテナの状態を確認する場合は、
+
+```bash
+docker compose ps
+```
+
+を使用します。
+
+MySQLを停止する場合は、
+
+```bash
+docker compose down
+```
+
+を使用します。
+
+---
+
+## 11. 学習の進め方
+
+各データベースについて、以下の流れで作成します。
+
+```text
+① データベース設計
+        ↓
+② テーブル設計
+        ↓
+③ ER図作成
+        ↓
+④ CREATE TABLE
+        ↓
+⑤ INSERT
+        ↓
+⑥ UPDATE / DELETE
+        ↓
+⑦ SELECT
+        ↓
+⑧ JOIN
+        ↓
+⑨ GROUP BY
+        ↓
+⑩ 動作確認
+        ↓
+⑪ README整理
+```
+
+同じ流れを複数の題材で繰り返すことで、SQLの基本操作を定着させます。
+
+---
+
+## 12. 今後の学習
+
+今回のタスク管理DBを基礎として、今後は以下のデータベースを作成する予定です。
+
+1. タスク管理DB
+2. 図書館管理DB
+3. 成績管理DB
+
+タスク管理DBではSQLの基本操作を学習しました。
+
+次は図書館管理DBを作成し、同じSQL操作を別のデータ構造で実践します。
+
+最後に成績管理DBを作成し、複数のテーブルを関連付けたデータベースの設計・SQL操作についてさらに理解を深めます。
+
+これらのデータベースはJavaのシステムとは直接接続せず、データベース単体の設計・SQL学習用の成果物として作成します。
+
+---
+
+## 13. 目標
+
+このプロジェクトを通して、以下の内容を自分で設計・作成できることを目標とします。
+
+* データベースの基本設計
+* テーブル設計
+* 主キー・外部キーの設定
+* ER図の作成
+* SQLによるデータ操作
+* 複数テーブルを使用したJOIN
+* GROUP BYを使用したデータ集計
+* Dockerを使用したMySQL環境構築
+
+最終的には、データベースの設計からSQLの作成・実行までを一通り自分で行える状態を目指します。
