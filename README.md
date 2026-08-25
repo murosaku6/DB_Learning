@@ -86,7 +86,42 @@ MySQLはDockerコンテナ上で起動しています。
 
 ---
 
-## 5. テーブル間の関係
+## 5. 学習したSQL
+
+- CREATE TABLE
+- INSERT
+- SELECT
+- WHERE
+- ORDER BY
+- UPDATE
+- DELETE
+- JOIN
+- GROUP BY
+
+## 6. SQLファイル
+
+| ファイル | 内容 |
+|---|---|
+| 01_create_tables.sql | データベース・テーブル作成 |
+| 02_insert_data.sql | サンプルデータ登録 |
+| 03_update_delete.sql | データ更新・削除 |
+| 04_select.sql | SELECT・WHERE・ORDER BY |
+| 05_join.sql | 複数テーブルのJOIN |
+| 06_group_by.sql | GROUP BYによる集計 |
+
+## 7. ER図
+
+`diagram/er_diagram.png`
+
+にER図を配置しています。
+
+## 8. 実行環境
+
+MySQL 8.4をDockerで起動し、GitHub Codespaces上でSQLを実行しています。
+
+---
+
+## 9. テーブル間の関係
 
 テーブル間には以下のリレーションを設定しています。
 
@@ -100,36 +135,3 @@ tasks
   │ N : 1
   ↓
 categories
-
-## 学習したSQL
-
-- CREATE TABLE
-- INSERT
-- SELECT
-- WHERE
-- ORDER BY
-- UPDATE
-- DELETE
-- JOIN
-- GROUP BY
-
-## SQLファイル
-
-| ファイル | 内容 |
-|---|---|
-| 01_create_tables.sql | データベース・テーブル作成 |
-| 02_insert_data.sql | サンプルデータ登録 |
-| 03_update_delete.sql | データ更新・削除 |
-| 04_select.sql | SELECT・WHERE・ORDER BY |
-| 05_join.sql | 複数テーブルのJOIN |
-| 06_group_by.sql | GROUP BYによる集計 |
-
-## ER図
-
-`diagram/er_diagram.png`
-
-にER図を配置しています。
-
-## 実行環境
-
-MySQL 8.4をDockerで起動し、GitHub Codespaces上でSQLを実行しています。
